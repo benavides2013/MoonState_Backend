@@ -17,7 +17,7 @@ const juegoSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['Pendiente', 'Jugando', 'Completado'], // opciones válidas
+        enum: ['Pendiente', 'Jugando', 'Completado', 'Entrenamiento', 'Competitivo'], // opciones válidas
         default: 'Pendiente', // valor por defecto
     },
     horasJugadas: {
