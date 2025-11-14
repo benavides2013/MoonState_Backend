@@ -3,37 +3,42 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// Crear app
+// Crear servidor
 const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 
-// Middleware
+// --------------------- MIDDLEWARE ---------------------
 app.use(cors({
   origin: [
-    'http://localhost:5173', // Vite local
-    'https://benavides2013.github.io' // GitHub Pages
+    'http://localhost:5173',              // Frontend en local (Vite)
+    'https://benavides2013.github.io'     // Frontend en GitHub Pages
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 app.use(express.json());
 
-// Conexión a MongoDB
+// --------------------- CONEXIÓN A MONGODB ---------------------
 mongoose.connect(MONGODB_URL)
-  .then(() => console.log('✅ Conexión exitosa a MongoDB Atlas'))
-  .catch(err => console.error('❌ Error de conexión:', err.message));
+  .then(() => console.log('✅ Conectado correctamente a MongoDB Atlas'))
+  .catch(err => console.error('❌ Error conectando a MongoDB:', err.message));
 
-// Importar rutas
+// --------------------- IMPORTAR RUTAS ---------------------
 const juegoRoutes = require('./routes/juegoRoutes');
-app.use('/api/juegos', juegoRoutes); // ✅ Conecta las rutas CRUD
+const resenaRoutes = require('./routes/resenaRoutes');
 
-// Ruta base de prueba
+// Aquí montamos los endpoints REALES 👇
+app.use('/api/juegos', juegoRoutes);
+app.use('/api/resenas', resenaRoutes);
+
+// --------------------- RUTA BASE ---------------------
 app.get('/', (req, res) => {
   res.send('🌙 Bienvenido a la API de MoonState');
 });
 
-// Levantar servidor
+// --------------------- INICIAR SERVIDOR ---------------------
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+  console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
 });
