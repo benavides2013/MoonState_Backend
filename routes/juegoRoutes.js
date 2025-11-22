@@ -21,6 +21,19 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// ========== POST - Crear nuevo juego ==========
+router.post('/', async (req, res) => {
+  try {
+    const nuevoJuego = new Juego(req.body);
+    await nuevoJuego.save();
+    res.status(201).json(nuevoJuego);
+  } catch (err) {
+    console.error('Error al crear juego:', err);
+    res.status(500).json({ error: 'Error al crear juego' });
+  }
+});
+
 // EDITAR UN JUEGO
 router.put('/:id', async (req, res) => {
   try {

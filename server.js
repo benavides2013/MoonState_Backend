@@ -7,14 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const MONGODB_URL = process.env.MONGODB_URL;
 
-// ← AGREGAR ESTO PRIMERO
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ← LUEGO CORS
+
 app.use(cors());
 
-// ← LUEGO TODO LO DEMÁS
+
 mongoose.connect(MONGODB_URL)
   .then(() => console.log('✅ Conectado correctamente a MongoDB Atlas'))
   .catch(err => console.error('❌ Error conectando a MongoDB:', err.message));
@@ -30,5 +29,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Yeii, el Servidor backend está corriendo en puerto 😭 ${PORT}`);
+  console.log(`Yeii, el Servidor backend está corriendo en puerto 😭${PORT}`);
 });
