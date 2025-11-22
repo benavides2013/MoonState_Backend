@@ -11,8 +11,8 @@ router.get('/', resenaController.obtenerResenas);
 // Obtener reseñas por ID de juego   ← NECESARIO PARA EL FRONTEND
 router.get('/juego/:juegoId', resenaController.obtenerResenasPorJuego);
 
-// Obtener UNA reseña por su ID (opcional)
-router.get('/', resenaController.obtenerResenas);
+// Obtener UNA reseña por su ID 
+router.get('/:id', resenaController.obtenerResenas);
 
 // Actualizar reseña
 router.put('/:id', resenaController.actualizarResena);
