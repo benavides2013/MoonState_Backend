@@ -14,20 +14,15 @@ exports.crearResena = async (req, res) => { //Reciba petición de respuesta//
     }
 };
 
-//R Obtener datos con opción de filtrar
 exports.obtenerResenas = async (req, res) => {
-    try {
-        //Permite filtrar reseñas por el ID del juego enviado en la query
-        const filtro = req.query.juegoId ? { juego: req.query.juegoId } : {};
-
-        // .populate('juego', 'nombre') trae el nombre del juego relacionado
-        const resenas = await Resena.find(filtro).populate('juego', 'nombre');
-
-        res.status(200).json(resenas);
-    } catch (error) {
-        res.status(500).json({ error: 'Error al obtener las reseñas' });
-    }
+  try {
+    const resenas = await Resena.find().populate("juego");
+    res.json(resenas);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener reseñas" });
+  }
 };
+
 
 //R
 exports.obtenerResenaPorId = async (req, res) => {
@@ -83,4 +78,14 @@ exports.eliminarResena = async (req, res) => {
     } catch (error) {
         res.status(500).json({error: 'Error al eliminar la reseña'});
     }
+};
+
+exports.obtenerResenasPorJuego = async (req, res) => {
+  try {
+    const { juegoId } = req.params;
+    const resenas = await Resena.find({ juego: juegoId });
+    res.json(resenas);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener reseñas del juego' });
+  }
 };

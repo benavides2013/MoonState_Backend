@@ -7,6 +7,11 @@ const juegoSchema = new mongoose.Schema({
         trim: true,
         unique: true,
     },
+    genero: {
+        type: String,
+        required: [true, 'El genero del juego es obligarorio'],
+    },
+
     plataforma: {
         type: String,
         required: [true, 'La plataforma es obligatoria'],
