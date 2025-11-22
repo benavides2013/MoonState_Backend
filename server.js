@@ -30,5 +30,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
+  console.log(`Yeii, el Servidor backend está corriendo en puerto 😭 ${PORT}`);
 });
